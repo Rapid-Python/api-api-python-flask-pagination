@@ -15,20 +15,20 @@ except:
     print("ERROR - Cannot connect to db")
 
 
-def add_todo_db(name):
+def todo_db(name):
     todos_collection = db.todos
     todos_collection.insert_one({'name': name, 'complete': False})
 
 
-def all_task():
+def task_db():
     info = db.todos
     return list(info.find({},
                           {
                               "_id": {"$toString": "$_id"},
                               "name": 1,
                               "complete": 1,
-                          }
-                          ))
+    }
+    ))
 
 
 def test(task_id):
@@ -79,5 +79,4 @@ def get_pagination(page_size, page_no):
                                   "next_page": int(page_no),
                                   "prev_page": int(page_no)
                               }
-                          }).skip(page_no).limit(page_size))
-
+    }).skip(page_no).limit(page_size))
